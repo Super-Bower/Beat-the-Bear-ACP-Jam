@@ -18,6 +18,8 @@ let howManyLevels = 0;
 let playerLevel = 0;
 let unitToAdd = 1;
 
+let berryScore = 0;
+
 /*
 document.getElementById("healthDiv").addEventListener("click", addHealth);
 document.getElementById("damageDiv").addEventListener("click", addDamage);
@@ -25,9 +27,13 @@ document.getElementById("critDiv").addEventListener("click", addCrit);
 document.getElementById("healDiv").addEventListener("click", addHeal);
 */
 
-document.getElementById("testButton5").addEventListener("click", levelUpReady);
+//document.getElementById("testButton5").addEventListener("click", levelUpReady);
 
 document.getElementById("berryBlock").addEventListener("click", berryGame);
+
+/*for (num = 1; num <= 8; num++) { wooo
+  document.getElementById(whichBerry).addEventListener("click", function(){berryHit(whichBerry);});
+}*/
 
 document.getElementById("beginFight").addEventListener("click", beginFight);
 
@@ -305,9 +311,54 @@ function bearHealed() {
 }
 
 function berryGame() {
+  //Setup
   document.getElementById("backgroundL").style.display = "none";
   document.getElementById("backgroundM").style.display = "none";
   document.getElementById("backgroundR").style.display = "none";
 
+  document.getElementById("levelBackground").style.display = "none";
+  document.getElementById("attackBackground").style.display = "none";
+  document.getElementById("healBackground").style.display = "none";
+
+  //document.getElementById("testButton5").style.display = "none";
+
   document.getElementById("berryBush").style.display = "block";
+
+  //Berry randomization
+  for (num = 1; num <= 8; num++) {
+    let whichBerry = "berry" + num;
+    let berryScale = Math.floor(Math.random() * 50) + 20;
+
+    document.getElementById(whichBerry).style.display = "inline-block";
+    
+    document.getElementById(whichBerry).style.width = berryScale + "px";
+    document.getElementById(whichBerry).style.height = berryScale + "px";
+    
+    document.getElementById(whichBerry).style.top = (Math.floor(Math.random() * 50) + 1) + "%";
+    document.getElementById(whichBerry).style.left = (Math.floor(Math.random() * 50) + 25) + "%";
+
+    document.getElementById(whichBerry).addEventListener("click", function(){berryHit(whichBerry);});
+
+    const berryPause = setTimeout(function(){
+      document.getElementById("backgroundL").style.display = "block";
+      document.getElementById("backgroundM").style.display = "block";
+      document.getElementById("backgroundR").style.display = "block";
+    
+      document.getElementById("levelBackground").style.display = "block";
+      document.getElementById("attackBackground").style.display = "block";
+      document.getElementById("healBackground").style.display = "block";
+    
+      document.getElementById("berryBush").style.display = "none";
+    }, 7500);
+  }
+}
+
+function berryHit(berry) {
+  document.getElementById(berry).style.display = "none";
+
+  berryScore++;
+  if (berryScore >= 4) {
+    levelUpReady();
+    berryScore = 0;
+  }
 }
