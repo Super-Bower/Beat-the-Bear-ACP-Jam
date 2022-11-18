@@ -1,0 +1,191 @@
+body {
+  background-image: url('background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.statBlock {
+  background-color: darkslategray;
+  opacity: 1.0;
+  width: 80%;
+  padding: 17.5px;
+  margin: 5px auto;
+
+  border-radius: 10px;
+  border-width: 2px;
+  border-color: whitesmoke;
+  border-style: ridge;
+
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+.statText {
+  color: whitesmoke;
+  font-size: 22.5px;
+  margin: 5px;
+  display: inline-block;
+}
+
+.statSubText {
+  color: whitesmoke;
+  font-size: 15px;
+  margin: 5px;
+  display: inline-block;
+}
+
+.background {
+  background-color: rgba(110, 110, 110, 0.7);
+  width: 27vw;
+  height: 80vh; /*650*/
+  /*position: absolute;*/
+  padding: 4px;
+  margin: 2px;
+  /*display: inline-block;*/
+  overflow: scroll;
+
+  border-radius: 10px;
+}
+
+.tabTitle {
+  color: whitesmoke;
+  font-size: 30px;
+  margin: 10px auto;
+  text-align: center;
+  font-weight: bold;
+}
+
+.actionBlock {
+  background-color: rgba(110, 110, 110, 0.6);
+  /*color: rgba(110, 110, 110, 0.4);*/
+  width: 27vw;
+  padding: 20px 8px;
+  text-align: center;
+
+  border-radius: 10px;
+  border-width: 2px;
+  border-color: whitesmoke;
+  border-style: solid;
+
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+/*.actionBlock:hover {
+  background-color: rgba(30, 200, 80, 0.9);
+  cursor: grab;
+}*/
+
+.actionSubText {
+  color: whitesmoke;
+  font-size: 15px;
+  margin: 0px;
+  padding: 0px;
+  display: inline-block;
+}
+
+.berry {
+  background-color: red;
+  width: 50px;
+  height: 50px;
+
+  border-radius: 50%;
+}
+
+#backgroundL {
+  float: left;
+}
+#backgroundM {
+  margin: 0 auto;
+}
+#backgroundR {
+  /*margin-left: auto;
+  margin-right: 0;*/
+  float: right;
+}
+
+#caveman {
+  display: block;
+  width: 70%;
+  margin: 0 auto;
+}
+
+#bear {
+  display: none;
+  height: 80vh;
+  margin: 2px auto;
+}
+
+#bearDiv {
+  width: 400px;
+  margin: 0 auto;
+}
+
+#beginFight:hover {
+  background-color: darkred;
+  cursor: grab;
+}
+
+#textLevel {
+  color: rgba(160, 160, 160, 0.4);
+  font-size: 30px;
+  margin: 0px auto;
+  text-align: center;
+  font-weight: bold;
+}
+
+#howToLevel {
+  color: rgba(160, 160, 160, 0.4);
+}
+
+#textAttack {
+  color: rgba(160, 160, 160, 0.4);
+  font-size: 30px;
+  margin: 0px auto;
+  text-align: center;
+  font-weight: bold;
+}
+
+#textHeal {
+  color: rgba(160, 160, 160, 0.4);
+  font-size: 30px;
+  margin: 0px auto;
+  text-align: center;
+  font-weight: bold;
+}
+
+#levelBackground {
+  float: left;
+}
+#attackBackground {
+  margin: 0 auto;
+}
+#healBackground {
+  float: right;
+}
+
+#battleDialogueDiv {
+  background-color: gray;
+  opacity: 0.9;
+  width: 30vw;
+  position: fixed;
+  top: 30%;
+  left: 35%;
+  display: none;
+
+  border-radius: 15px;
+}
+
+#battleDialogue {
+  color: whitesmoke;
+  font-size: 1.5vw;
+  text-align: center;
+  padding: 6px;
+}
+
+#berryBush {
+  display: none;
+}

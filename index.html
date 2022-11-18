@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Beat the Bear</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+  
+    <div class = "background" id = "backgroundR">
+      <p class = "tabTitle">Bear Stats:</p>
+  
+      <div class = "statBlock">
+        <p class = "statText" id = "bearHealth">Health - 100</p>
+      </div>
+      
+      <div class = "statBlock">
+        <p class = "statText" id = "bearDamage">Damage - 14</p>
+      </div>
+      
+      <div class = "statBlock">
+        <p class = "statText" id = "bearCrit">Crit. Attack Chance - 15%</p>
+        <br>
+        <p class = "statSubText">Bear Crit. Ammount - Double Damage</p>
+      </div>
+      
+      <div class = "statBlock">
+        <p class = "statText" id = "bearHeal">Heal Chance - 35%</p>
+        <br>
+        <p class = "statSubText">Heal Ammount - 30% of Max Health</p>
+      </div>
+    
+      <div class = "statBlock" id = "beginFight">
+        <p class = "statText">Fight The Bear</p>
+        <br>
+        <p class = "statSubText">Are you ready?</p>
+      </div>
+    </div>
+    
+    <!-- End of block 1 -->
+    
+    <div class = "background" id = "backgroundL">
+  
+      <p class = "tabTitle">Caveman Stats:</p>
+      
+      <div class = "statBlock" id = "healthDiv">
+        <p class = "statText" id = "playerHealth">Health - 10</p>
+      </div>
+      
+      <div class = "statBlock" id = "damageDiv">
+        <p class = "statText" id = "playerDamage">Damage - 5</p>
+      </div>
+      
+      <div class = "statBlock" id = "critDiv">
+        <p class = "statText" id = "playerCrit">Crit. Attack Chance - 1%</p>
+        <br>
+        <p class = "statSubText">Player Crit. Ammount - Double Damage</p>
+      </div>
+      
+      <div class = "statBlock" id = "healDiv">
+        <p class = "statText" id = "playerHeal">Heal Chance - 1%</p>
+        <br>
+        <p class = "statSubText">Heal Ammount - 30% of Max Health</p>
+      </div>
+    
+      <div class = "statBlock">
+        <p class = "statText" id = "playerLevel">Level - 0</p>
+        <br>
+        <p class = "statSubText" id = "playerIncrease">Stat Increase Amount - 1</p>
+      </div>
+  
+      <div id = "caveDiv">
+        <img id = "caveman" src = "caveman.png">
+      </div>
+  
+    </div>
+
+    <div id = "bearDiv">
+      <img id = "bear" src = "bear.png">
+    </div>
+
+    <div id = "battleDialogueDiv">
+      <p id = "battleDialogue"></p>
+    </div>
+  
+    <!-- End of block 2 -->
+  
+    <div class = "background" id = "backgroundM">
+      <p class = "tabTitle">Tasks:</p>
+
+      <div class = "statBlock" id = "berryBlock">
+        <p class = "statText" id = "berryText">Pick Berries</p>
+        <br>
+        <p class = "statSubText">Time attack game</p>
+      </div>
+
+      <!--
+      <button id = "testButton">Press to change health</button>
+      <button id = "testButton2">Press to change damage</button>
+      <button id = "testButton3">Press to change crit</button>
+      <button id = "testButton4">Press to change heal</button>
+      -->
+    </div>
+  
+    <!-- End of block 3 -->
+
+    <div id = "berryBush">
+      <div class = "berry" id = "berry1"></div>
+      <div class = "berry" id = "berry2"></div>
+      <div class = "berry" id = "berry3"></div>
+      <div class = "berry" id = "berry4"></div>
+    </div>
+    
+    <br>
+  
+    <div class = "actionBlock" id = "healBackground">
+      <p class = "actionTitle" id = "textHeal">Heal!</p>
+    </div>
+
+    <div class = "actionBlock" id = "levelBackground">
+      <p class = "actionTitle" id = "textLevel">Level Up ready!</p>
+      <p class = "actionSubText" id = "howToLevel">Click on a stat to upgrade</p>
+    </div>
+
+    <div class = "actionBlock" id = "attackBackground">
+      <p class = "actionTitle" id = "textAttack">Attack!</p>
+    </div>
+
+    <button id = "testButton5">Press to level up</button>
+
+    
+    <script src="script.js"></script>
+  </body>
+
+</html>
