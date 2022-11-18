@@ -118,7 +118,8 @@ body {
 
 #bear {
   display: none;
-  height: 80vh;
+  width: 35vw;
+  /*height: 80vh;*/
   margin: 2px auto;
 }
 

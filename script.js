@@ -31,9 +31,10 @@ document.getElementById("healDiv").addEventListener("click", addHeal);
 
 document.getElementById("berryBlock").addEventListener("click", berryGame);
 
-/*for (num = 1; num <= 8; num++) { wooo
+for (num = 1; num <= 8; num++) {
+  let whichBerry = "berry" + num;
   document.getElementById(whichBerry).addEventListener("click", function(){berryHit(whichBerry);});
-}*/
+}
 
 document.getElementById("beginFight").addEventListener("click", beginFight);
 
@@ -337,7 +338,7 @@ function berryGame() {
     document.getElementById(whichBerry).style.top = (Math.floor(Math.random() * 50) + 1) + "%";
     document.getElementById(whichBerry).style.left = (Math.floor(Math.random() * 50) + 25) + "%";
 
-    document.getElementById(whichBerry).addEventListener("click", function(){berryHit(whichBerry);});
+    //document.getElementById(whichBerry).addEventListener("click", function(){berryHit(whichBerry);});
 
     const berryPause = setTimeout(function(){
       document.getElementById("backgroundL").style.display = "block";
@@ -349,7 +350,7 @@ function berryGame() {
       document.getElementById("healBackground").style.display = "block";
     
       document.getElementById("berryBush").style.display = "none";
-    }, 7500);
+    }, 4200);
   }
 }
 
