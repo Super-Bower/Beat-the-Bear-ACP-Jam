@@ -61,6 +61,7 @@ body {
   background-color: rgba(110, 110, 110, 0.6);
   /*color: rgba(110, 110, 110, 0.4);*/
   width: 27vw;
+  /*height: 10vh;*/
   padding: 20px 8px;
   text-align: center;
 
@@ -73,11 +74,6 @@ body {
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
 }
-
-/*.actionBlock:hover {
-  background-color: rgba(30, 200, 80, 0.9);
-  cursor: grab;
-}*/
 
 .actionSubText {
   color: whitesmoke;
@@ -96,6 +92,15 @@ body {
   display: inline-block;
 
   border-radius: 50%;
+}
+
+.hiveLevel {
+  background-color: goldenrod;
+  width: 60vw;
+  height: 38vh;
+  margin: -10vh auto;
+
+  border-radius: 40%;
 }
 
 #backgroundL {
@@ -119,13 +124,21 @@ body {
 #bear {
   display: none;
   width: 35vw;
-  /*height: 80vh;*/
+  height: 80vh;
   margin: 2px auto;
 }
 
 #bearDiv {
   width: 400px;
   margin: 0 auto;
+}
+
+#levelDiv {
+  background-color: #00364a;
+}
+
+#beginFight {
+  background-color: #00364a;
 }
 
 #beginFight:hover {
@@ -198,4 +211,27 @@ body {
   display: none;
 
   border-radius: 40%;
+}
+
+#berryBlock {
+  background-color: #b51a00;
+}
+
+#berryBlock:hover {
+  cursor: pointer;
+}
+
+#hiveBlock {
+  background-color: goldenrod;
+}
+
+#hiveBlock:hover {
+  cursor: pointer;
+}
+
+#beehive {
+  display: none;
+  position: absolute;
+  top: 12%;
+  left: 22%;
 }

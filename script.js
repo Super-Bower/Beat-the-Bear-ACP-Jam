@@ -18,6 +18,9 @@ let howManyLevels = 0;
 let playerLevel = 0;
 let unitToAdd = 1;
 
+let mouseStat = false;
+let mouseAction = false;
+
 let berryScore = 0;
 
 /*
@@ -27,22 +30,31 @@ document.getElementById("critDiv").addEventListener("click", addCrit);
 document.getElementById("healDiv").addEventListener("click", addHeal);
 */
 
-//document.getElementById("testButton5").addEventListener("click", levelUpReady);
+document.getElementById("testButton5").addEventListener("click", levelUpReady);
+
+document.getElementById("healthDiv").addEventListener("mouseover", function(){mouseChangeEnter("healthDiv")});
+document.getElementById("damageDiv").addEventListener("mouseover", function(){mouseChangeEnter("damageDiv")});
+document.getElementById("critDiv").addEventListener("mouseover", function(){mouseChangeEnter("critDiv")});
+document.getElementById("healDiv").addEventListener("mouseover", function(){mouseChangeEnter("healDiv")});
 
 document.getElementById("berryBlock").addEventListener("click", berryGame);
-
 for (num = 1; num <= 8; num++) {
   let whichBerry = "berry" + num;
   document.getElementById(whichBerry).addEventListener("click", function(){berryHit(whichBerry);});
 }
 
+document.getElementById("hiveBlock").addEventListener("click", hiveGame);
+
 document.getElementById("beginFight").addEventListener("click", beginFight);
+
+document.getElementById("attackBackground").addEventListener("mouseover", function(){mouseChangeEnter("attackBackground")});
+document.getElementById("healBackground").addEventListener("mouseover", function(){mouseChangeEnter("healBackground")});
 
 function addHealth() {
   if (playerHealth + unitToAdd < 100) {
     playerHealth += unitToAdd;
     maxPlayerHealth += unitToAdd;
-    playerHealAmount = Math.round(maxPlayerHealth * 0.3);
+    playerHealAmount = Math.floor(maxPlayerHealth * 0.3);
     document.getElementById("playerHealth").innerHTML = "Health - " + playerHealth;
   }
   else {
@@ -104,6 +116,12 @@ function levelUp() {
     document.getElementById("damageDiv").removeEventListener("click", addDamage);
     document.getElementById("critDiv").removeEventListener("click", addCrit);
     document.getElementById("healDiv").removeEventListener("click", addHeal);
+
+    mouseStat = false;
+    mouseChangeEnter("healthDiv");
+    mouseChangeEnter("damageDiv");
+    mouseChangeEnter("critDiv");
+    mouseChangeEnter("healDiv");
   }
 
   else {
@@ -121,6 +139,8 @@ function levelUpReady() {
   document.getElementById("damageDiv").addEventListener("click", addDamage);
   document.getElementById("critDiv").addEventListener("click", addCrit);
   document.getElementById("healDiv").addEventListener("click", addHeal);
+
+  mouseStat = true;
 
   if (howManyLevels > 1) {
     document.getElementById("textLevel").innerHTML = "Level Up ready! (" + howManyLevels + ")";
@@ -146,6 +166,7 @@ function beginFight() {
   document.getElementById("healDiv").removeEventListener("click", addHeal);
 
   howManyLevels = 0;
+  mouseStat = false;
 
   playerTurn();
 }
@@ -161,6 +182,8 @@ function playerTurn() {
   
   document.getElementById("attackBackground").addEventListener("click", attackBear);
   document.getElementById("healBackground").addEventListener("click", playerHealed);
+
+  mouseAction = true;
 }
 
 function attackBear() {
@@ -171,7 +194,23 @@ function attackBear() {
       document.getElementById("bearHealth").innerHTML = "Health - " + (bearHealth - (playerDamage * 2));
       bearHealth -= (playerDamage * 2);
 
-      document.getElementById("battleDialogue").innerHTML = "- Caveman attacks, and gets a critical hit dealing " + (playerDamage * 2) + " damage";
+      if (bearHealth <= 0) {
+        document.getElementById("bearHealth").innerHTML = "Health - " + 0;
+        bearHealth = 0;
+    
+        document.getElementById("attackBackground").removeEventListener("click", attackBear);
+        document.getElementById("healBackground").removeEventListener("click", playerHealed);
+        
+        document.getElementById("battleDialogue").innerHTML = "- Caveman attacks with a critical hit and wins";
+      }
+
+      else {
+        document.getElementById("battleDialogue").innerHTML = "- Caveman attacks, and gets a critical hit dealing " + (playerDamage * 2) + " damage";
+
+        document.getElementById("attackBackground").removeEventListener("click", attackBear);
+        document.getElementById("healBackground").removeEventListener("click", playerHealed);
+        bearTurn();
+      }
     }
 
     else {
@@ -179,11 +218,11 @@ function attackBear() {
       bearHealth -= playerDamage;
 
       document.getElementById("battleDialogue").innerHTML = "- Caveman attacks, dealing " + playerDamage + " damage";
-    }
 
-    document.getElementById("attackBackground").removeEventListener("click", attackBear);
-    document.getElementById("healBackground").removeEventListener("click", playerHealed);
-    bearTurn();
+      document.getElementById("attackBackground").removeEventListener("click", attackBear);
+      document.getElementById("healBackground").removeEventListener("click", playerHealed);
+      bearTurn();
+    }
   }
 
   else {
@@ -204,6 +243,11 @@ function playerHealed() {
   if ((Math.floor(Math.random() * 100) + 1) <= playerHeal) {
     if (playerHealth + playerHealAmount <= 100) {
       playerHealth += playerHealAmount;
+      if (playerHealth > maxPlayerHealth || maxPlayerHealth >= 100) {
+        maxPlayerHealth = playerHealth;
+        playerHealAmount = Math.floor(maxPlayerHealth * 0.3);
+      }
+      
       document.getElementById("playerHealth").innerHTML = "Health - " + playerHealth;
 
       document.getElementById("battleDialogue").innerHTML = "- Caveman heals, gaining " + playerHealAmount + " health";
@@ -211,6 +255,8 @@ function playerHealed() {
 
     else {
       playerHealth = 100;
+      maxPlayerHealth = 100;
+      
       document.getElementById("playerHealth").innerHTML = "Health - " + 100;
 
       document.getElementById("battleDialogue").innerHTML = "- Caveman heals to full health";
@@ -232,6 +278,10 @@ function bearTurn() {
   document.getElementById("attackBackground").style.backgroundColor = "rgba(110, 110, 110, 0.6)";
   document.getElementById("healBackground").style.backgroundColor = "rgba(110, 110, 110, 0.6)";
 
+  mouseAction = false;
+  mouseChangeEnter("attackBackground");
+  mouseChangeEnter("healBackground");
+
   if ((Math.floor(Math.random() * 100) + 1) <= 70) {
     //Bear attacks player
     const bearPause1 = setTimeout(attackPlayer, 2000);
@@ -249,18 +299,20 @@ function attackPlayer() {
       document.getElementById("playerHealth").innerHTML = "Health - " + (playerHealth - (bearDamage * 2));
       playerHealth -= (bearDamage * 2);
 
-      document.getElementById("battleDialogue").innerHTML += "<br>- Bear attacks, and gets a critical hit dealing " + (bearDamage * 2) + " damage";
-
-      if (playerHealth < 0) {
+      if (playerHealth <= 0) {
         document.getElementById("playerHealth").innerHTML = "Health - " + 0;
         playerHealth = 0;
 
-        document.getElementById("battleDialogue").innerHTML += "<br>- Bear attacks and the Caveman loses";
+        document.getElementById("battleDialogue").innerHTML += "<br>- Bear attacks with a critical hit and the Caveman loses";
 
         document.getElementById("attackBackground").removeEventListener("click", attackBear);
         document.getElementById("healBackground").removeEventListener("click", playerHealed);
+      }
 
-        //Lose function
+      else {
+        document.getElementById("battleDialogue").innerHTML += "<br>- Bear attacks, and gets a critical hit dealing " + (bearDamage * 2) + " damage";
+
+        const bearPause2 = setTimeout(playerTurn, 2000);
       }
     }
       
@@ -269,9 +321,9 @@ function attackPlayer() {
       playerHealth -= bearDamage;
 
       document.getElementById("battleDialogue").innerHTML += "<br>- Bear attacks, dealing " + bearDamage + " damage";
+
+      const bearPause2 = setTimeout(playerTurn, 2000);
     }
-    
-    const bearPause2 = setTimeout(playerTurn, 2000);
   }
 
   else {
@@ -361,5 +413,38 @@ function berryHit(berry) {
   if (berryScore >= 4) {
     levelUpReady();
     berryScore = 0;
+  }
+}
+
+function hiveGame() {
+  //Setup
+  document.getElementById("backgroundL").style.display = "none";
+  document.getElementById("backgroundM").style.display = "none";
+  document.getElementById("backgroundR").style.display = "none";
+
+  document.getElementById("levelBackground").style.display = "none";
+  document.getElementById("attackBackground").style.display = "none";
+  document.getElementById("healBackground").style.display = "none";
+
+  //document.getElementById("testButton5").style.display = "none";
+
+  document.getElementById("beehive").style.display = "block";
+}
+
+function mouseChangeEnter(element) {
+  if (mouseStat) {
+    document.getElementById(element).style.cursor = "pointer";
+  }
+
+  else if (mouseAction) {
+    document.getElementById(element).style.cursor = "pointer";
+    document.getElementById("healthDiv").style.cursor = "default";
+    document.getElementById("damageDiv").style.cursor = "default";
+    document.getElementById("critDiv").style.cursor = "default";
+    document.getElementById("healDiv").style.cursor = "default";
+  }
+
+  else {
+    document.getElementById(element).style.cursor = "default";
   }
 }
