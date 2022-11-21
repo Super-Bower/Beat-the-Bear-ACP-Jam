@@ -1,7 +1,7 @@
 let playerHealth = 10;
 let playerDamage = 5;
-let playerCrit = 1;
-let playerHeal = 1;
+let playerCrit = 3;
+let playerHeal = 15;
 
 let maxPlayerHealth = 10;
 let playerHealAmount = 0;
@@ -23,6 +23,13 @@ let mouseAction = false;
 
 let berryScore = 0;
 
+let honeyChance1 = 95;
+let honeyChance2 = 75;
+let honeyChance3 = 55;
+let honeyScore = 0;
+
+let honeyStart = true;
+
 /*
 document.getElementById("healthDiv").addEventListener("click", addHealth);
 document.getElementById("damageDiv").addEventListener("click", addDamage);
@@ -30,7 +37,9 @@ document.getElementById("critDiv").addEventListener("click", addCrit);
 document.getElementById("healDiv").addEventListener("click", addHeal);
 */
 
-document.getElementById("testButton5").addEventListener("click", levelUpReady);
+//document.getElementById("testButton5").addEventListener("click", levelUpReady);
+
+document.getElementById("howToPlay").addEventListener("click", function(){alert("To vanquish the bear, you must upgrade your stats, by completing tasks. When you're ready, you can click 'Fight the Bear'. The Challenge of this game lies in how LOW of level can you be at, yet still being able to defeat the bear.");});
 
 document.getElementById("healthDiv").addEventListener("mouseover", function(){mouseChangeEnter("healthDiv")});
 document.getElementById("damageDiv").addEventListener("mouseover", function(){mouseChangeEnter("damageDiv")});
@@ -43,7 +52,14 @@ for (num = 1; num <= 8; num++) {
   document.getElementById(whichBerry).addEventListener("click", function(){berryHit(whichBerry);});
 }
 
+
 document.getElementById("hiveBlock").addEventListener("click", hiveGame);
+document.getElementById("leaveHive").addEventListener("click", hiveEnd);
+
+document.getElementById("honeycomb1").addEventListener("click", function(){combHit(honeyChance1, 0.34);});
+document.getElementById("honeycomb2").addEventListener("click", function(){combHit(honeyChance2, 0.50);});
+document.getElementById("honeycomb3").addEventListener("click", function(){combHit(honeyChance3, 0.66);});
+
 
 document.getElementById("beginFight").addEventListener("click", beginFight);
 
@@ -429,11 +445,104 @@ function hiveGame() {
   //document.getElementById("testButton5").style.display = "none";
 
   document.getElementById("beehive").style.display = "block";
+
+  if (honeyStart) {
+    honeyChance1 = 95;
+    honeyChance2 = 75;
+    honeyChance3 = 55;
+
+    document.getElementById("honeyText1").innerHTML = "Levels: 1/3<br>Chance: " + honeyChance1 + "%";
+    document.getElementById("honeyText2").innerHTML = "Levels: 1/2<br>Chance: " + honeyChance2 + "%";
+    document.getElementById("honeyText3").innerHTML = "Levels: 2/3<br>Chance: " + honeyChance3 + "%";
+
+    document.getElementById("leaveHiveLetters2").innerHTML = "Levels Gained: 0";
+  }
+
+  for (num = 1; num <= 3; num++) {
+    let whichHoney = "honey" + num;
+    let whichHoneycomb = "honeycomb" + num;
+    let honeyScale = Math.floor(Math.random() * 12) + 12;
+
+    document.getElementById(whichHoney).style.display = "inline-block";
+    document.getElementById(whichHoneycomb).style.display = "inline-block";
+    
+    document.getElementById(whichHoney).style.width = honeyScale + 15 + "%";
+    document.getElementById(whichHoneycomb).style.width = honeyScale + 20 + "%";
+
+    document.getElementById(whichHoneycomb).style.marginLeft = (Math.floor(Math.random() * 50) + 10) + "%";
+  }
+}
+
+function combHit(honeyChance, honeyAmount) {
+  honeyStart = false;
+  if ((Math.floor(Math.random() * 100) + 1) <= honeyChance) {
+    hiveGame();
+    if (honeyChance3 > 6) {
+      honeyChance1 -= 1;
+      honeyChance2 -= 1;
+      honeyChance3 -= 1;
+
+      honeyScore += honeyAmount;
+    }
+
+    else {
+      honeyChance1 = 45;
+      honeyChance2 = 25;
+      honeyChance3 = 5;
+    }
+
+    document.getElementById("honeyText1").innerHTML = "Levels: 1/3<br>Chance: " + honeyChance1 + "%";
+    document.getElementById("honeyText2").innerHTML = "Levels: 1/2<br>Chance: " + honeyChance2 + "%";
+    document.getElementById("honeyText3").innerHTML = "Levels: 2/3<br>Chance: " + honeyChance3 + "%";
+
+    document.getElementById("leaveHiveLetters2").innerHTML = "Levels Gained: " + Math.floor(honeyScore);
+  }
+
+  else {
+    document.getElementById("backgroundL").style.display = "block";
+    document.getElementById("backgroundM").style.display = "block";
+    document.getElementById("backgroundR").style.display = "block";
+    
+    document.getElementById("levelBackground").style.display = "block";
+    document.getElementById("attackBackground").style.display = "block";
+    document.getElementById("healBackground").style.display = "block";
+    
+    document.getElementById("beehive").style.display = "none";
+
+    honeyStart = true;
+    honeyScore = 0;
+
+    document.getElementById("battleDialogueDiv").style.display = "block";
+    document.getElementById("battleDialogue").innerHTML = "The Caveman got stung!";
+    const hivePause = setTimeout(function(){
+      document.getElementById("battleDialogueDiv").style.display = "none";
+    }, 2000);
+  }
+}
+
+function hiveEnd() {
+  document.getElementById("backgroundL").style.display = "block";
+  document.getElementById("backgroundM").style.display = "block";
+  document.getElementById("backgroundR").style.display = "block";
+    
+  document.getElementById("levelBackground").style.display = "block";
+  document.getElementById("attackBackground").style.display = "block";
+  document.getElementById("healBackground").style.display = "block";
+    
+  document.getElementById("beehive").style.display = "none";
+
+  honeyStart = true;
+  
+  for (levelAmount = 1; levelAmount <= Math.floor(honeyScore); levelAmount++) {
+      levelUpReady();
+  }
 }
 
 function mouseChangeEnter(element) {
   if (mouseStat) {
     document.getElementById(element).style.cursor = "pointer";
+    document.getElementById("attackBackground").style.cursor = "default";
+    document.getElementById("healBackground").style.cursor = "default";
   }
 
   else if (mouseAction) {

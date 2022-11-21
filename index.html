@@ -9,6 +9,10 @@
   </head>
 
   <body>
+
+    <div id = "howToPlay">
+      <p id = "howToText">?</p>
+    </div>
   
     <div class = "background" id = "backgroundR">
       <p class = "tabTitle">Bear Stats:</p>
@@ -55,13 +59,13 @@
       </div>
       
       <div class = "statBlock" id = "critDiv">
-        <p class = "statText" id = "playerCrit">Crit. Attack Chance - 1%</p>
+        <p class = "statText" id = "playerCrit">Crit. Attack Chance - 3%</p>
         <br>
         <p class = "statSubText">Player Crit. Ammount - Double Damage</p>
       </div>
       
       <div class = "statBlock" id = "healDiv">
-        <p class = "statText" id = "playerHeal">Heal Chance - 1%</p>
+        <p class = "statText" id = "playerHeal">Heal Chance - 15%</p>
         <br>
         <p class = "statSubText">Heal Ammount - 30% of Max Health</p>
       </div>
@@ -94,13 +98,13 @@
       <div class = "statBlock" id = "berryBlock">
         <p class = "statText" id = "berryText">Pick Berries</p>
         <br>
-        <p class = "statSubText">Collect at least 4 berries to level up</p>
+        <p class = "statSubText">Collect at least 4 berries to level up before time runs out</p>
       </div>
 
       <div class = "statBlock" id = "hiveBlock">
         <p class = "statText" id = "hiveText">Open the Beehive</p>
         <br>
-        <p class = "statSubText">Collect as much honey as you can to level up</p>
+        <p class = "statSubText">Collect as much honey as you can to level up without getting stung</p>
       </div>
 
       <!--
@@ -127,15 +131,29 @@
 
     <div id = "beehive">
       <div class = "hiveLevel">
+        <div id = "leaveHive">
+          <p id = "leaveHiveLetters1">Leave Hive</p>
+          <p id = "leaveHiveLetters2">Levels Gained: 0</p>
+        </div>
         
+        <div class = "honeycomb" id = "honeycomb1">
+          <img class = "honey" id = "honey1" src = "honey.png">
+          <p class = "honeyText" id = "honeyText1">Levels: 1/3<br>Chance: 95%</p>
+        </div>
       </div>
 
       <div class = "hiveLevel">
-        
+        <div class = "honeycomb" id = "honeycomb2">
+          <img class = "honey" id = "honey2" src = "honey.png">
+          <p class = "honeyText" id = "honeyText2">Levels: 1/2<br>Chance: 75%</p>
+        </div>
       </div>
 
       <div class = "hiveLevel">
-        
+        <div class = "honeycomb" id = "honeycomb3">
+          <img class = "honey" id = "honey3" src = "honey.png">
+          <p class = "honeyText" id = "honeyText3">Levels: 2/3<br>Chance: 55%</p>
+        </div>
       </div>
     </div>
     
@@ -154,7 +172,7 @@
       <p class = "actionTitle" id = "textAttack">Attack!</p>
     </div>
 
-    <button id = "testButton5">Press to level up</button>
+    <!--<button id = "testButton5">Press to level up</button>-->
 
     
     <script src="script.js"></script>
