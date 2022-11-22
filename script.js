@@ -28,6 +28,10 @@ let honeyChance2 = 75;
 let honeyChance3 = 55;
 let honeyScore = 0;
 
+let whichHoney = "honey1";
+let whichHoneycomb = "honeycomb1";
+let honeyScale = Math.floor(Math.random() * 12) + 12;
+
 let honeyStart = true;
 
 /*
@@ -72,6 +76,7 @@ function addHealth() {
     maxPlayerHealth += unitToAdd;
     playerHealAmount = Math.floor(maxPlayerHealth * 0.3);
     document.getElementById("playerHealth").innerHTML = "Health - " + playerHealth;
+    levelUp();
   }
   else {
     playerHealth = 100;
@@ -79,40 +84,39 @@ function addHealth() {
     playerHealAmount = 30;
     document.getElementById("playerHealth").innerHTML = "Health - " + playerHealth;
   }
-  levelUp();
 }
 function addDamage() {
   if (playerDamage + unitToAdd < 100) {
     playerDamage += unitToAdd;
     document.getElementById("playerDamage").innerHTML = "Damage - " + playerDamage;
+    levelUp();
   }
   else {
     playerDamage = 100;
     document.getElementById("playerDamage").innerHTML = "Damage - " + playerDamage;
   }
-  levelUp();
 }
 function addCrit() {
   if (playerCrit + unitToAdd < 100) {
     playerCrit += unitToAdd;
     document.getElementById("playerCrit").innerHTML = "Crit. Attack Chance - " + playerCrit + "%";
+    levelUp();
   }
   else {
     playerCrit = 100;
     document.getElementById("playerCrit").innerHTML = "Crit. Attack Chance - " + playerCrit + "%";
   }
-  levelUp();
 }
 function addHeal() {
   if (playerHeal + unitToAdd < 100) {
     playerHeal += unitToAdd;
     document.getElementById("playerHeal").innerHTML = "Heal Chance - " + playerHeal + "%";
+    levelUp();
   }
   else {
     playerHeal = 100;
     document.getElementById("playerHeal").innerHTML = "Heal Chance - " + playerHeal + "%";
   }
-  levelUp();
 }
 
 function levelUp() {
@@ -459,9 +463,9 @@ function hiveGame() {
   }
 
   for (num = 1; num <= 3; num++) {
-    let whichHoney = "honey" + num;
-    let whichHoneycomb = "honeycomb" + num;
-    let honeyScale = Math.floor(Math.random() * 12) + 12;
+    whichHoney = "honey" + num;
+    whichHoneycomb = "honeycomb" + num;
+    honeyScale = Math.floor(Math.random() * 12) + 12;
 
     document.getElementById(whichHoney).style.display = "inline-block";
     document.getElementById(whichHoneycomb).style.display = "inline-block";
@@ -530,12 +534,13 @@ function hiveEnd() {
   document.getElementById("healBackground").style.display = "block";
     
   document.getElementById("beehive").style.display = "none";
-
-  honeyStart = true;
   
   for (levelAmount = 1; levelAmount <= Math.floor(honeyScore); levelAmount++) {
       levelUpReady();
   }
+
+  honeyScore = 0;
+  honeyStart = true;
 }
 
 function mouseChangeEnter(element) {

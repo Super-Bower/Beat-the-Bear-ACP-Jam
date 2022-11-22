@@ -84,7 +84,7 @@ body {
 }
 
 .berry {
-  background-color: red;
+  background-color: #b92327;
   width: 50px;
   height: 50px;
   margin: 10px;
@@ -185,7 +185,7 @@ body {
 }
 
 #beginFight:hover {
-  background-color: darkred;
+  background-color: #831100;
   cursor: grab;
 }
 
@@ -241,7 +241,7 @@ body {
 
 #battleDialogue {
   color: whitesmoke;
-  font-size: 1.5vw;
+  font-size: 2.3vw;
   text-align: center;
   padding: 6px;
 }
@@ -299,6 +299,6 @@ body {
 }
 
 #leaveHiveLetters2 {
-  font-size: 0.8vw;
+  font-size: 1vw;
   margin: 0;
 }
